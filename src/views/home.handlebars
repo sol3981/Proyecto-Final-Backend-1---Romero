@@ -1,0 +1,47 @@
+{{#if error}}
+    <div class="error-message">
+        <strong>Error:</strong> {{error}}
+    </div>
+{{/if}}
+
+{{#if hasProducts}}
+    <div class="products-grid">
+        {{#each products}}
+            <div class="product-card">
+                <h3>{{this.title}}</h3>
+                <p><strong>Descripción:</strong> {{this.description}}</p>
+                <p class="product-price">${{this.price}}</p>
+                
+                <div>
+                    <span class="product-badge badge-code">Código: {{this.code}}</span>
+                    <span class="product-badge badge-category">{{this.category}}</span>
+                    <span class="product-badge badge-stock">Stock: {{this.stock}}</span>
+                </div>
+                
+                <p style="margin-top: 10px;">
+                    <strong>Estado:</strong> 
+                    {{#if this.status}}
+                        <span class="status-active">✓ Disponible</span>
+                    {{else}}
+                        <span class="status-inactive">✗ No disponible</span>
+                    {{/if}}
+                </p>
+                
+                <p style="font-size: 0.85em; color: #999; margin-top: 10px;">
+                    <strong>ID:</strong> {{this.id}}
+                </p>
+            </div>
+        {{/each}}
+    </div>
+{{else}}
+    <div class="no-products">
+        <h2>No hay productos disponibles</h2>
+        <p>Agrega productos desde la vista en tiempo real</p>
+    </div>
+{{/if}}
+
+<div style="text-align: center; margin-top: 30px; padding: 20px; background: #f5f5f5; border-radius: 8px;">
+    <p style="color: #666; margin-bottom: 10px;">
+        <strong>Para agregar productos </strong> visita la sección <a href="/realtimeproducts" style="color: #0A3A40;">Productos en Tiempo Real</a>
+    </p>
+</div>

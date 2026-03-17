@@ -55,6 +55,10 @@ router.get('/:pid', (req, res) => {
 router.post('/', (req, res) => {
   try {
     const newProduct = productManager.addProduct(req.body);
+    
+    // Emitir evento de socket para actualizar en tiempo real
+    req.io.emit('updateProducts', productManager.getProducts());
+    
     res.status(201).json({
       status: 'success',
       message: 'Producto creado exitosamente',
@@ -91,6 +95,10 @@ router.delete('/:pid', (req, res) => {
   try {
     const productId = parseInt(req.params.pid);
     const deletedProduct = productManager.deleteProduct(productId);
+    
+    // Emitir evento de socket para actualizar en tiempo real
+    req.io.emit('updateProducts', productManager.getProducts());
+    
     res.json({
       status: 'success',
       message: 'Producto eliminado exitosamente',
